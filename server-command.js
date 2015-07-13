@@ -1,12 +1,23 @@
 var http=require('http');   //引入http模块
 var express=require('express'); //引入express模块
 var sio=require('socket.io'); //引入socket.io模块
-var settings=require('./settings.js');  //引入settings.js模块
+var settings=require('./settings.js');  //引入settings.js模块---数据库设置
 var mysql=require('mysql');  //引入Mysql模块
 var app=express();  //创建express实例
 var path=require('path');  //引入path模块
 var parse=require('./js/parse.js');  //引入自定义的parse.js模块
+var morgan=require('morgan');  //引入morgon模块---用于存储日志
+var fs = require('fs');  //引入fs模块
 var server=http.createServer(app);
+var accessLogStream = fs.createWriteStream(__dirname + '/accessCommand.log', {flags: 'a'});
+var errLogStream = fs.createWriteStream(__dirname + '/errCommand.log', {flags: 'a'});
+app.use(morgan('combined', {stream: accessLogStream}));  //将访问日志写入accessCommand.log中
+app.use(function(err, req, res, next){
+    var meta = '[' + new Date() + '] ' + req.url + '\n';
+    errLogStream.write(meta + err.stack + '\n');
+    console.log('出现错误，已保存到errCommand.log文件中'+meta+err.stack);
+    next();
+});     //将错误日志写入errCommand.log中
 app.get('/',function(req,res){
     res.sendfile(__dirname+'/command.html');
 });   //设置路由，当客户端请求'/'时，发送文件command.html

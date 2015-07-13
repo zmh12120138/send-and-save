@@ -12,18 +12,18 @@ var fs = require('fs');  //引入fs模块
 var numCPUs=os.cpus().length;   //获取CPU的数量
 var workers={};
 var server=http.createServer(app);
-var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
-var errLogStream = fs.createWriteStream(__dirname + '/err.log', {flags: 'a'});
-app.use(morgan('combined', {stream: accessLogStream}));
-app.use(function(err,req,res,next){
-     var meta='['+new Date()+']'+req.url+'\n';
-     errLogStream.write(meta+err.stack+'\n');
-     next();
-    });
+var accessLogStream = fs.createWriteStream(__dirname + '/accessTransfer.log', {flags: 'a'});
+var errLogStream = fs.createWriteStream(__dirname + '/errTransfer.log', {flags: 'a'});
 app.get('/',function(req,res){
     res.sendfile(__dirname+'/client.html');
 });   //设置路由
-
+app.use(morgan('combined', {stream: accessLogStream}));  //将访问日志写入accessTransfer.log中
+app.use(function(err, req, res, next){
+    var meta = '[' + new Date() + '] ' + req.url + '\n';
+    errLogStream.write(meta + err.stack + '\n');
+    console.log('出现错误，已保存到errTransfer.log文件中'+meta+err.stack);
+    next();
+});     //将错误日志写入errTransfer.log中
 if(cluster.isMaster){
     //主进程分支
     cluster.on('death', function (worker) {    // 当一个工作进程结束时，重启工作进程
