@@ -8,7 +8,7 @@
 </head>
 <script>
     var sendlist1='FE FE FE FE FE FE FE FE FE FE FE FE FE 68 25 91 09 20 59 00 11 11 81 2E 1F 90 12 00 00 00 00 05 00 03 00 00 05 00 00 00 00 17 00 00 00 00 35 27 00 00 00 2C 60 14 00 74 14 00 46 54 00 51 49 09 22 04 10 20 00 00 6D 16';
-    var transfer=io.connect("http://localhost:1337");   //连接传输服务器
+
     var commond=io.connect("http://localhost:1338");  //连接命令服务器
     commond.on('start',function(data){
         //使用命令通道监听start事件
@@ -16,7 +16,8 @@
         var sendList={};
         sendList.send=sendlist1;
         sendList.code=code;
-        transfer.emit('send',sendList);   //使用传输痛懂啊发送send事件
+        var transfer=io.connect("http://localhost:1337");   //连接传输服务器
+        transfer.emit('send',sendList);   //使用传输通道发送send事件
     });
 </script>
 <body>

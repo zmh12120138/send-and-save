@@ -48,25 +48,14 @@ if(cluster.isMaster){
         console.log('与客户端的传输通道建立');
         socket.on('send',function(data){
             //监听send事件
-            var cold=parse.parseCold(data.send); //解析cold字段
-            var warm=parse.parseWarm(data.send);  //解析warm字段
-            var meterid=parse.parseMeterid(data.send); //解析meterid字段
-            var power=parse.parsePower(data.send);  //解析power字段
-            var flow=parse.parseFlow(data.send);  //解析flow字段
-            var flowacc=parse.parseFlowacc(data.send);  //解析flowacc字段---流量总计
-            var temwatersupply=parse.parseTemwatersupply(data.send); //解析temwatersupply字段---供水温度
-            var temwaterreturn=parse.parseTemwaterreturn(data.send);  //解析temwaterreturn字段---回水温度
-            var worktime=parse.parseWorktime(data.send); //解析worktime字段---工作时间
-            var metertime=parse.parseMetertime(data.send);  //解析metertime字段---表内时间
-            var status=parse.parseStatus(data.send);  //解析status字段---状态
-            connection.query('INSERT INTO test1 SET ?',{meterid:meterid,cold:cold,warm:warm,power:power,flow:flow,flowacc:flowacc,temwatersupply:temwatersupply,temwaterreturn:temwaterreturn,worktime:worktime,metertime:metertime,status:status},function(err,result){
+            connection.query('INSERT INTO originaldata SET ?',{originaldata:data.send,date:new Date()},function(err,result){
                 if(err){
+                    errLogStream.write( '[' + new Date() + '] ' + '\n' + err.stack + '\n');
                     throw (err);
-                    errLogStream.write(meta + err.stack + '\n');
                 }
                 //向控制台发送信息
                 console.log('数据接收完毕！  任务编号:'+data.code+'由子进程'+cluster.worker.id+'处理');
-            });   //将解析结果写入数据库
+            });//将接收到的原始数据存至数据库
         });
 
         socket.on('disconnect',function(){

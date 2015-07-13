@@ -152,3 +152,18 @@ exports.parseStatus=function(data) {
         return '水倒流';
     }
 };
+exports.parseAll=function(data){
+    var afterParse={};
+    afterParse.meterid=this.parseMeterid(data);
+    afterParse.cold=this.parseCold(data);
+    afterParse.warm=this.parseWarm(data);
+    afterParse.power=this.parsePower(data);
+    afterParse.flow=this.parseFlow(data);
+    afterParse.flowacc=this.parseFlowacc(data);
+    afterParse.temwatersupply=this.parseTemwatersupply(data);
+    afterParse.temwaterreturn=this.parseTemwaterreturn(data);
+    afterParse.worktime=this.parseWorktime(data);
+    afterParse.metertime=this.parseMetertime(data);
+    afterParse.status=this.parseStatus(data);
+    return afterParse;
+}
