@@ -28,12 +28,12 @@
             var parse2 = meterid.slice(2, 4);
             var parse3 = meterid.slice(4, 6);
             var parse4 = meterid.slice(6, 8);
-            var meterNum = 'FE FE FE FE ' + parse4 + ' ' + parse3 + ' ' + parse2 + ' ' + parse1 + ' ' + '00 11 11 01 03 1F 90 12 82 16';
+            var commandSend = 'FE FE FE FE ' + parse4 + ' ' + parse3 + ' ' + parse2 + ' ' + parse1 + ' ' + '00 11 11 01 03 1F 90 12 82 16';
             var data = {};
-            data.meterNum = meterNum;
+            data.commandSend = commandSend;
             data.code = code;
             data.meterid = meterid;
-            document.write('抄表，命令为' + meterNum);
+            document.write('抄表，命令为' + commandSend);
             command.emit('meterReading', data);
             alert('命令已发送！');
         }

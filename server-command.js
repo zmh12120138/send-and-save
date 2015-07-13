@@ -32,22 +32,30 @@ socket.on('connection',function(socket){
     console.log('与客户端的命令连接已建立');
    socket.on('meterReading',function(data){
         //监听meterReading事件
-       connection.query('INSERT INTO log SET ?',{code:data.code,meterid:data.meterid,date:new Date()},function(err,result){
-           if(err) throw (err);
-           console.log('已保存日志到数据库!');
+       connection.query('INSERT INTO log SET ?',{code:data.code,meterid:data.meterid,date:new Date(),commandSend:data.commandSend},function(err,result){
+           if(err){
+               throw (err);
+               errLogStream.write(meta + err.stack + '\n');
+           }
+           console.log('已保存命令日志到数据库!');
        });   //保存抄表命令到数据库的log表中
        connection.query('SELECT time,frequency FROM setting WHERE id=1',function(err,result){
            //查询数据中的抄表命令设置信息，间隔时间和次数
-           if(err) throw(err);
+           if(err){
+               throw(err);
+               errLogStream.write(meta + err.stack + '\n');
+           }
            else{
                console.log('收到命令,命令代码为:'+data.meterNum+'配置信息为: 时间间隔：'+result[0].time+'   次数:'+result[0].frequency);
                //向控制台发送信息
                var timer=0;
+               var process;
                var intervalKey=null;
                function intervalsend(){
                    timer++;
+                   process=(timer/(result[0].frequency)*100).toFixed(2);
                    socket.broadcast.emit('start',data);
-                   console.log('命令已发送'+timer+'次   任务编号： '+data.code);
+                   console.log('命令已发送'+timer+'次   任务编号： '+data.code+' 进度'+process+'%');
                    if(timer>=result[0].frequency){
                        clearInterval(intervalKey);
                        intervalKey=null;
@@ -63,7 +71,10 @@ socket.on('connection',function(socket){
         //监听setInfo事件
         console.log('正在修改配置信息!');
         connection.query('UPDATE setting SET ? WHERE id=1',{time:data.time,frequency:data.frequency},function(err,result){
-            if(err) throw(err);
+            if(err){
+                throw(err);
+                errLogStream.write(meta + err.stack + '\n');
+            }
             else{console.log('配置信息保存成功！')}
         })  //将配置信息保存至数据库的setting表中
     })

@@ -60,7 +60,10 @@ if(cluster.isMaster){
             var metertime=parse.parseMetertime(data.send);  //解析metertime字段---表内时间
             var status=parse.parseStatus(data.send);  //解析status字段---状态
             connection.query('INSERT INTO test1 SET ?',{meterid:meterid,cold:cold,warm:warm,power:power,flow:flow,flowacc:flowacc,temwatersupply:temwatersupply,temwaterreturn:temwaterreturn,worktime:worktime,metertime:metertime,status:status},function(err,result){
-                if(err) throw (err);
+                if(err){
+                    throw (err);
+                    errLogStream.write(meta + err.stack + '\n');
+                }
                 //向控制台发送信息
                 console.log('数据接收完毕！  任务编号:'+data.code+'由子进程'+cluster.worker.id+'处理');
             });   //将解析结果写入数据库
