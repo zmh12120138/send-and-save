@@ -4,7 +4,6 @@ var sio=require('socket.io');  //引入socket.io模块
 var settings=require('./settings.js');  //引入自定义的setting.js模块
 var mysql=require('mysql');  //引入Mysql模块
 var app=express();   //创建express实例
-var parse=require('./js/parse.js');  //引入自定义的parse.js模块
 var cluster=require('cluster');  //引入cluster模块
 var cp=require('child_process');
 var os=require('os');   //引入os模块
@@ -32,7 +31,6 @@ if(cluster.isMaster){
         workers[worker.pid]=worker;
     }
     //主进程分支
-
     cluster.on('exit',function(worker,code,signal){   //当一个进程关闭后，重新开启一个进程
         delete workers[worker.pid];
         worker = cluster.fork();
@@ -77,6 +75,5 @@ if(cluster.isMaster){
             //监听disconnect事件
             console.log('已经断开传输通道连接！');
         })
-
     });
 }
