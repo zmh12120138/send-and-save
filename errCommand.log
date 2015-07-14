@@ -1,0 +1,15 @@
+[Tue Jul 14 2015 15:56:59 GMT+0800 (中国标准时间)] 
+Error: read ECONNRESET
+    at exports._errnoException (util.js:746:11)
+    at TCP.onread (net.js:559:26)
+    --------------------
+    at Protocol._enqueue (C:\Users\2015\Desktop\send and save\node_modules\mysql\lib\protocol\Protocol.js:135:48)
+    at Connection.query (C:\Users\2015\Desktop\send and save\node_modules\mysql\lib\Connection.js:201:25)
+    at Socket.<anonymous> (C:\Users\2015\Desktop\send and save\server-command.js:73:20)
+    at Socket.emit (events.js:107:17)
+    at Socket.onevent (C:\Users\2015\node_modules\socket.io\lib\socket.js:330:8)
+    at Socket.onpacket (C:\Users\2015\node_modules\socket.io\lib\socket.js:290:12)
+    at Client.ondecoded (C:\Users\2015\node_modules\socket.io\lib\client.js:193:14)
+    at Decoder.Emitter.emit (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\node_modules\component-emitter\index.js:134:20)
+    at Decoder.add (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\index.js:247:12)
+    at Client.ondata (C:\Users\2015\node_modules\socket.io\lib\client.js:175:18)
