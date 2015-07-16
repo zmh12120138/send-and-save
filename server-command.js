@@ -9,6 +9,7 @@ var parse=require('./js/parse.js');  //引入自定义的parse.js模块
 var morgan=require('morgan');  //引入morgon模块---用于存储日志
 var fs = require('fs');  //引入fs模块
 var cluster=require('cluster');//引入cluster模块
+var workers={};
 var server=http.createServer(app);
 var accessLogStream = fs.createWriteStream(__dirname + '/accessCommand.log', {flags: 'a'});
 var errLogStream = fs.createWriteStream(__dirname + '/errCommand.log', {flags: 'a'});
@@ -43,12 +44,13 @@ if(cluster.isMaster){
 }else{
     server.listen(1338);
     var socket=sio.listen(server);  //监听1338端口
-
-    var connection=mysql.createConnection({host:settings.host,port:settings.port,database:settings.database,user:settings.user,password:settings.password});
+    var clientCode=0;
+    var connection=mysql.createConnection({host:settings.mysql.host,port:settings.mysql.port,database:settings.mysql.database,user:settings.mysql.user,password:settings.mysql.password});
 //连接至Mysql数据库
     socket.on('connection',function(socket){
         //监听connection事件
-        console.log('与客户端的命令连接已建立');
+        console.log('与客户端的命令连接通道已经建立');
+        socket.emit('clientCode',Math.floor(Math.random()*1000000)+1);   //向客户端发送clientCode时间，为客户端制定客户端编码
         socket.on('meterReading',function(data){
             //监听meterReading事件
             connection.query('INSERT INTO log SET ?',{code:data.code,meterid:data.meterid,date:new Date(),commandSend:data.commandSend},function(err,result){
@@ -65,7 +67,7 @@ if(cluster.isMaster){
                     throw(err);
                 }
                 else{
-                    console.log('收到命令,命令代码为:'+data.meterNum+'配置信息为: 时间间隔：'+result[0].time+'   次数:'+result[0].frequency);
+                    console.log('收到命令,命令代码为:'+data.commandSend+'配置信息为: 时间间隔：'+result[0].time+'   次数:'+result[0].frequency);
                     //向控制台发送信息
                     var timer=0;
                     var process;

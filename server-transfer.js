@@ -2,15 +2,15 @@ var http=require('http');  //引入hptp模块
 var express=require('express'); //引入express模块
 var sio=require('socket.io');  //引入socket.io模块
 var settings=require('./settings.js');  //引入自定义的setting.js模块
-var mysql=require('mysql');  //引入Mysql模块
 var app=express();   //创建express实例
 var cluster=require('cluster');  //引入cluster模块
 var cp=require('child_process');
 var os=require('os');   //引入os模块
 var morgan=require('morgan');  //引入morgon模块---用于存储日志
 var fs = require('fs');  //引入fs模块
-var numCPUs=os.cpus().length;   //获取CPU的数量
+var redis=require('redis') //引入redis模块
 var workers={};
+var numCPUs=os.cpus().length;   //获取CPU的数量
 var server=http.createServer(app);
 var accessLogStream = fs.createWriteStream(__dirname + '/accessTransfer.log', {flags: 'a'});
 var errLogStream = fs.createWriteStream(__dirname + '/errTransfer.log', {flags: 'a'});
@@ -24,9 +24,10 @@ app.use(function(err, req, res, next){
     console.log('出现错误，已保存到errTransfer.log文件中'+meta+err.stack);
     next();
 });     //将错误日志写入errTransfer.log中
+var i=0;
 if(cluster.isMaster){
     //初始开启与CPU数量相同的工作进程
-    for(var i=0;i<numCPUs;i++){
+    for(var j=0;j<numCPUs;j++){
         var worker=cluster.fork();
         workers[worker.pid]=worker;
     }
@@ -46,34 +47,50 @@ if(cluster.isMaster){
         }
     })
 }else{
-    //工作进程分支，启动服务器
     server.listen(1337);
     var socket=sio.listen(server);   //监听1337端口
-    var parse= cp.fork(__dirname+'/server-parse.js'); //再次开启子进程，运行sever-parse模块
-    var connection=mysql.createConnection({host:settings.host,port:settings.port,database:settings.database,user:settings.user,password:settings.password});
-   //连接mysql数据库，设置信息在settings.js模块
+    var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
+    var saveData= cp.fork(__dirname+'/save-originaldata.js'); //再次开启子进程
+    var connectionNum=1;
     socket.on('connection',function(socket){
         //监听connection事件
+        connectionNum=connectionNum+1;
         console.log('与客户端的传输通道建立');
-        socket.on('send',function(data){
-            //监听send事件
-            parse.send(data.send);  //向名字为parse的子进程发送数据，数据为data.send
-            connection.query('INSERT INTO originaldata SET ?',{originaldata:data.send,date:new Date()},function(err,result){
-                if(err){
-                    errLogStream.write( '[' + new Date() + '] ' + '\n' + err.stack + '\n');
-                    throw (err);
-                }
-                else{
-                    //向控制台发送信息
-                    console.log('数据接收完毕！  任务编号:'+data.code+'由子进程'+cluster.worker.id+'处理');
-
-                }
-            });//将接收到的原始数据存至数据库
+        console.log('当前连接数量：'+connectionNum);
+        socket.on('sendData',function(data){
+            //监听sendData事件
+            console.log('收到命令，开始存入缓存');
+            var clientCode=data.clientCode;
+            function createHash(data){
+                var originaldata='originaldata'+i+':'+clientCode;
+                console.log(originaldata);
+                client.hgetall(originaldata,function(err,response){
+                    if(err) throw (err);
+                    else{
+                        if(!response){
+                            client.hmset(originaldata,'id',i,'data',data.send,'date',new Date(),function(err,response){
+                                if(err) throw (err);
+                                return true;
+                            });
+                        }else{
+                            i=i+1;
+                            client.hmset(originaldata,'id',i,'data',data.send,'date',new Date(),function(err,response){
+                                if(err) throw (err);
+                                return true;
+                            });
+                        }
+                        i=i+1;
+                        saveData.send(originaldata);
+                    }
+                });
+            }    //定义createHash函数
+            createHash(data);   //执行此函数，参数为data
         });
 
         socket.on('disconnect',function(){
             //监听disconnect事件
-            console.log('已经断开传输通道连接！');
+            connectionNum=connectionNum-1;
+            console.log('已经断开传输通道连接！,当前连接数量:'+connectionNum);
         })
     });
 }

@@ -12,7 +12,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="./socket.io/socket.io.js"></script>
     <script>
-        var command=io.connect("192.168.0.103:1338");
+        var command=io.connect("localhost:1338");
         function meterReading() {
             var meterid = document.getElementById('meterid').value;
             var code = document.getElementById('code').value;
