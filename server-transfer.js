@@ -4,11 +4,11 @@ var sio=require('socket.io');  //引入socket.io模块
 var settings=require('./settings.js');  //引入自定义的setting.js模块
 var app=express();   //创建express实例
 var cluster=require('cluster');  //引入cluster模块
-var cp=require('child_process');
+var cp=require('child_process');  //引入child_process模块
 var os=require('os');   //引入os模块
 var morgan=require('morgan');  //引入morgon模块---用于存储日志
 var fs = require('fs');  //引入fs模块
-var redis=require('redis') //引入redis模块
+var redis=require('redis'); //引入redis模块
 var workers={};
 var numCPUs=os.cpus().length;   //获取CPU的数量
 var server=http.createServer(app);
@@ -50,7 +50,7 @@ if(cluster.isMaster){
     server.listen(1337);
     var socket=sio.listen(server);   //监听1337端口
     var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
-    var saveData= cp.fork(__dirname+'/save-originaldata.js'); //再次开启子进程
+    var saveData= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
     socket.on('connection',function(socket){
         //监听connection事件
         console.log('与客户端的传输通道建立');
@@ -58,32 +58,15 @@ if(cluster.isMaster){
             //监听sendData事件
             console.log('收到命令，开始存入缓存');
             var clientCode=data.clientCode;
-            function createHash(data){
-                var originaldata='originaldata'+i+':'+clientCode;
-                console.log(originaldata);
-                client.hgetall(originaldata,function(err,response){
-                    if(err) throw (err);
-                    else{
-                        if(!response){
-                            client.hmset(originaldata,'id',i,'data',data.send,'date',new Date(),function(err,response){
-                                if(err) throw (err);
-                                console.log('已经存入缓存');
-                                return true;
-                            });
-                        }else{
-                            i=i+1;
-                            client.hmset(originaldata,'id',i,'data',data.send,'date',new Date(),function(err,response){
-                                if(err) throw (err);
-                                console.log('已经存入缓存');
-                                return true;
-                            });
-                        }
-                        i=i+1;
-                       saveData.send(originaldata);
-                    }
-                });
-            }    //定义createHash函数
-            createHash(data);   //执行此函数，参数为data
+            var messageSend={};
+            messageSend.clientCode=clientCode;
+            messageSend.childId=cluster.worker.id;
+            client.lpush('originaldata',data.send,function(err,result){
+                if(err) throw (err);
+                else{
+                    saveData.send(messageSend);  //向子进程发送消息
+                }
+            })
         });
         socket.on('disconnect',function(){
             //监听disconnect事件
