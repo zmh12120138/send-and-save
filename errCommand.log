@@ -28,3 +28,297 @@ Error: read ECONNRESET
     at Decoder.Emitter.emit (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\node_modules\component-emitter\index.js:134:20)
     at Decoder.add (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\index.js:247:12)
     at Client.ondata (C:\Users\2015\node_modules\socket.io\lib\client.js:175:18)
+[Thu Jul 16 2015 17:55:25 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 17:59:05 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 17:59:21 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 17:59:36 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 17:59:48 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:00:18 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:00:18 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:51 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:52 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:53 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:57 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:01:59 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:09 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:13 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:16 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:18 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:20 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:24 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:26 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:28 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:30 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:33 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:36 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:39 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:44 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:47 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:50 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:52 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:54 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:56 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:59 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:02:59 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:03:11 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:03:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Thu Jul 16 2015 18:03:43 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:48:58 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:49:11 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:49:20 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:50:26 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:50:32 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:51:17 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:51:17 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:56:20 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:56:20 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:56:50 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:56:57 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:57:03 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:57:19 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:57:22 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:57:47 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:57:51 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:58:16 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:58:20 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:58:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:58:45 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:58:49 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:59:13 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 08:59:18 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:03:09 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:03:39 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:03:42 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:11:00 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:11:36 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:19:51 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:20:43 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:21:00 GMT+0800 (中国标准时间)] 
+Error: read ECONNRESET
+    at exports._errnoException (util.js:746:11)
+    at TCP.onread (net.js:559:26)
+    --------------------
+    at Protocol._enqueue (C:\Users\2015\Desktop\send and save\node_modules\mysql\lib\protocol\Protocol.js:135:48)
+    at Connection.query (C:\Users\2015\Desktop\send and save\node_modules\mysql\lib\Connection.js:201:25)
+    at Socket.<anonymous> (C:\Users\2015\Desktop\send and save\server-command.js:56:24)
+    at Socket.emit (events.js:107:17)
+    at Socket.onevent (C:\Users\2015\node_modules\socket.io\lib\socket.js:330:8)
+    at Socket.onpacket (C:\Users\2015\node_modules\socket.io\lib\socket.js:290:12)
+    at Client.ondecoded (C:\Users\2015\node_modules\socket.io\lib\client.js:193:14)
+    at Decoder.Emitter.emit (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\node_modules\component-emitter\index.js:134:20)
+    at Decoder.add (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\index.js:247:12)
+    at Client.ondata (C:\Users\2015\node_modules\socket.io\lib\client.js:175:18)
+[Fri Jul 17 2015 09:21:03 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:21:03 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:00 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:12 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:14 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:17 GMT+0800 (中国标准时间)] 
+Error: read ECONNRESET
+    at exports._errnoException (util.js:746:11)
+    at TCP.onread (net.js:559:26)
+    --------------------
+    at Protocol._enqueue (C:\Users\2015\Desktop\send and save\node_modules\mysql\lib\protocol\Protocol.js:135:48)
+    at Connection.query (C:\Users\2015\Desktop\send and save\node_modules\mysql\lib\Connection.js:201:25)
+    at Socket.<anonymous> (C:\Users\2015\Desktop\send and save\server-command.js:56:24)
+    at Socket.emit (events.js:107:17)
+    at Socket.onevent (C:\Users\2015\node_modules\socket.io\lib\socket.js:330:8)
+    at Socket.onpacket (C:\Users\2015\node_modules\socket.io\lib\socket.js:290:12)
+    at Client.ondecoded (C:\Users\2015\node_modules\socket.io\lib\client.js:193:14)
+    at Decoder.Emitter.emit (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\node_modules\component-emitter\index.js:134:20)
+    at Decoder.add (C:\Users\2015\node_modules\socket.io\node_modules\socket.io-parser\index.js:247:12)
+    at Client.ondata (C:\Users\2015\node_modules\socket.io\lib\client.js:175:18)
+[Fri Jul 17 2015 09:22:26 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:27 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:27 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:27 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:29 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:37 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:22:48 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:23:44 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:23:44 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:23:44 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:23:44 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:57:43 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 09:58:43 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:00:04 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:00:04 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:00:04 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:00:31 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:00:33 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:00:34 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:00:59 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:01:01 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:30 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:31 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:32 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:33 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:34 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:35 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:36 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:37 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:37 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:02:40 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:04:26 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:05:48 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:05:54 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:21 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:22 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:25 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:27 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:28 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:30 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:32 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:34 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:35 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:37 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:41 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:44 GMT+0800 (中国标准时间)] 
+有客户端断开连接
+[Fri Jul 17 2015 10:06:54 GMT+0800 (中国标准时间)] 
+有客户端断开连接

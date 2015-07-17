@@ -22,9 +22,11 @@
         sendList.send=sendlist1;
         sendList.code=code;
         sendList.clientCode=clientCode;
-
         transfer.emit('sendData',sendList);   //使用传输通道发送sendData事件
     });
+    commond.on('disconnect',function(){
+        document.write('本客户端与服务器断开连接！'+clientCode+'<br>');
+    })
 
 </script>
 <body>

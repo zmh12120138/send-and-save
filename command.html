@@ -34,8 +34,11 @@
             data.code = code;
             data.meterid = meterid;
             document.write('抄表，命令为' + commandSend);
-            command.emit('meterReading', data);
-            alert('命令已发送！');
+            command.emit('meterReading', data,function(){
+                if(err) alert('命令发送出错');
+                else alert('命令已发送！');
+            });
+
         }
         function setInfo(){
              var time = document.getElementById('time').value;
@@ -53,11 +56,9 @@
             setinfo.time=time;
             setinfo.frequency=frequency;
             command.emit('setInfo',setinfo);
-
         }
     </script>
 </head>
-
 <body>
 <div id="body" class="container center-block" style="padding: 50px 300px 300px 50px" >
     <div class="jumbotron center-block">
@@ -97,7 +98,6 @@
             <br>
         </form>
     </div>
-
 </div>
 </body>
 </html>

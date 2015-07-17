@@ -51,12 +51,9 @@ if(cluster.isMaster){
     var socket=sio.listen(server);   //监听1337端口
     var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
     var saveData= cp.fork(__dirname+'/save-originaldata.js'); //再次开启子进程
-    var connectionNum=1;
     socket.on('connection',function(socket){
         //监听connection事件
-        connectionNum=connectionNum+1;
         console.log('与客户端的传输通道建立');
-        console.log('当前连接数量：'+connectionNum);
         socket.on('sendData',function(data){
             //监听sendData事件
             console.log('收到命令，开始存入缓存');
@@ -70,27 +67,28 @@ if(cluster.isMaster){
                         if(!response){
                             client.hmset(originaldata,'id',i,'data',data.send,'date',new Date(),function(err,response){
                                 if(err) throw (err);
+                                console.log('已经存入缓存');
                                 return true;
                             });
                         }else{
                             i=i+1;
                             client.hmset(originaldata,'id',i,'data',data.send,'date',new Date(),function(err,response){
                                 if(err) throw (err);
+                                console.log('已经存入缓存');
                                 return true;
                             });
                         }
                         i=i+1;
-                        saveData.send(originaldata);
+                       saveData.send(originaldata);
                     }
                 });
             }    //定义createHash函数
             createHash(data);   //执行此函数，参数为data
         });
-
         socket.on('disconnect',function(){
             //监听disconnect事件
-            connectionNum=connectionNum-1;
-            console.log('已经断开传输通道连接！,当前连接数量:'+connectionNum);
+            errLogStream.write( '[' + new Date() + '] ' + '\n' + '有客户端断开连接' + '\n');
+            console.log('已经断开传输通道连接！');
         })
     });
 }
