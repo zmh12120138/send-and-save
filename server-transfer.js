@@ -1,13 +1,13 @@
 var http=require('http');  //引入hptp模块
 var express=require('express'); //引入express模块
 var sio=require('socket.io');  //引入socket.io模块
-var settings=require('./settings.js');  //引入自定义的setting.js模块
 var app=express();   //创建express实例
-var cp=require('child_process');  //引入child_process模块
 var morgan=require('morgan');  //引入morgon模块---用于存储日志
 var fs = require('fs');  //引入fs模块
 var redis=require('redis'); //引入redis模块
+var settings=require('./settings.js');  //引入自定义的setting.js模块
 var server=http.createServer(app);
+var cp=require('child_process');  //引入child_process模块
 var accessLogStream = fs.createWriteStream(__dirname + '/accessTransfer.log', {flags: 'a'});
 var errLogStream = fs.createWriteStream(__dirname + '/errTransfer.log', {flags: 'a'});
 app.get('/',function(req,res){
@@ -40,19 +40,16 @@ socket.on('connection',function(socket){
             else{
                 var randomNum=Math.floor(Math.random()*3)+1;
                 if(randomNum==1){
-                    messageSend.childId=1;
                     saveData1.send(messageSend);
                 }
                 if(randomNum==2){
-                    messageSend.childId=2;
                     saveData2.send(messageSend);
                 }
                 if(randomNum==3){
-                    messageSend.childId=3;
                     saveData3.send(messageSend);
                 }
             }
-        })
+        });
     });
     socket.on('disconnect',function(){
         //监听disconnect事件

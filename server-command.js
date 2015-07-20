@@ -42,6 +42,8 @@ socket.on('connection',function(socket){
             }
             console.log('已保存命令日志到数据库!');
         });   //保存抄表命令到数据库的log表中
+
+
         connection.query('SELECT time,frequency FROM setting WHERE id=1',function(err,result){
             //查询数据中的抄表命令设置信息，间隔时间和次数
             if(err){
@@ -70,6 +72,8 @@ socket.on('connection',function(socket){
             }
         });
     });
+
+
     socket.on('setInfo',function(data){
         //监听setInfo事件
         console.log('正在修改配置信息!');
@@ -81,6 +85,8 @@ socket.on('connection',function(socket){
             else{console.log('配置信息保存成功！')}
         })  //将配置信息保存至数据库的setting表中
     })
+
+
     socket.on('disconnect',function(){
         //监听disconnect事件
         connectionNum=connectionNum-1;
