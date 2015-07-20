@@ -5,15 +5,15 @@ var parse=require('./js/parse.js');  //引入自定义的parse.js模块
 var connection=mysql.createConnection({host:settings.mysql.host,port:settings.mysql.port,database:settings.mysql.database,user:settings.mysql.user,password:settings.mysql.password});
 //连接mysql数据库，设置信息在settings.js模块
 var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
-process.on('message',function(m){
+process.on('message',function(m){    //当收到父进程发送的消息后，执行saveData()函数
     saveData(m);
 });
 
 
 function saveData(data){
-    var llen=client.llen('originaldata');
+    var llen=client.llen('originaldata');    //获取redis中originaldata列表的长度
     if(llen!=0){
-        client.rpop('originaldata',function(err,response){
+        client.rpop('originaldata',function(err,response){      //rpop用来读取列表中的第一个数据并将其删除--出队
             if(err) throw (err);
             else{
                 connection.query('INSERT INTO originaldata SET ?',{originaldata:response,date:new Date()},function(err,result){

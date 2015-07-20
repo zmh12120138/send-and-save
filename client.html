@@ -3,19 +3,19 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>send</title>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>  //为了使socket.io运行，需要在客户端引入
     <script src="./socket.io/socket.io.js"></script>
 </head>
 <script>
     var sendlist1='FE FE FE FE FE FE FE FE FE FE FE FE FE 68 25 91 09 20 59 00 11 11 81 2E 1F 90 12 00 00 00 00 05 00 03 00 00 05 00 00 00 00 17 00 00 00 00 35 27 00 00 00 2C 60 14 00 74 14 00 46 54 00 51 49 09 22 04 10 20 00 00 6D 16';
-    var commond=io.connect("localhost:1338");  //连接命令服务器
+    var command=io.connect("localhost:1338");  //连接命令服务器
     var transfer=io.connect("localhost:1337");   //连接传输服务器
     var clientCode;
-    commond.on('clientCode',function(data){
+    command.on('clientCode',function(data){
         clientCode=data;
         document.write('客户端编码：'+data);
     })
-    commond.on('start',function(data){
+    command.on('start',function(data){
         //使用命令通道监听start事件
         var code=data.code;
         var sendList={};
@@ -24,9 +24,9 @@
         sendList.clientCode=clientCode;
         transfer.emit('sendData',sendList);   //使用传输通道发送sendData事件
     });
-    commond.on('disconnect',function(){
+    command.on('disconnect',function(){
         document.write('本客户端与服务器断开连接！'+clientCode+'<br>');
-    })
+    });
 
 </script>
 <body>

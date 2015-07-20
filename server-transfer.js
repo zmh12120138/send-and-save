@@ -24,7 +24,7 @@ app.use(function(err, req, res, next){
     console.log('出现错误，已保存到errTransfer.log文件中'+meta+err.stack);
     next();
 });     //将错误日志写入errTransfer.log中
-var i=0;
+cluster.schedulingPolicy = cluster.SCHED_RR;   //使用cluster中的RR以实现负载均衡
 if(cluster.isMaster){
     //初始开启与CPU数量相同的工作进程
     for(var j=0;j<numCPUs;j++){
