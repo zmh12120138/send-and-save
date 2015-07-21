@@ -8,17 +8,10 @@ var path=require('path');  //引入path模块
 var morgan=require('morgan');  //引入morgon模块---用于存储日志
 var fs = require('fs');  //引入fs模块
 var server=http.createServer(app);
-var accessLogStream = fs.createWriteStream(__dirname + '/accessCommand.log', {flags: 'a'});
-var errLogStream = fs.createWriteStream(__dirname + '/errCommand.log', {flags: 'a'});
+var accessLogStream = fs.createWriteStream(__dirname + '/logs/accessCommand.log', {flags: 'a'});
 app.use(morgan('combined', {stream: accessLogStream}));  //将访问日志写入accessCommand.log中
-app.use(function(err, req, res, next){
-    var meta = '[' + new Date() + '] ' + req.url + '\n';
-    errLogStream.write(meta + err.stack + '\n');
-    console.log('出现错误，已保存到errCommand.log文件中'+meta+err.stack);
-    next();
-});     //将错误日志写入errCommand.log中
 app.get('/',function(req,res){
-    res.sendfile(__dirname+'/command.html');
+    res.sendFile(__dirname+'/command.html');
 });   //设置路由，当客户端请求'/'时，发送文件command.html
 app.use(express.static(path.join(__dirname, 'public')));  //设置public文件夹为静态资源文件夹
 server.listen(1338);
@@ -36,20 +29,13 @@ socket.on('connection',function(socket){
     socket.on('meterReading',function(data){
         //监听meterReading事件
         connection.query('INSERT INTO log SET ?',{code:data.code,meterid:data.meterid,date:new Date(),commandSend:data.commandSend},function(err,result){
-            if(err){
-                errLogStream.write( '[' + new Date() + '] ' + '\n' + err.stack + '\n');
-                throw (err);
-            }
+            if(err)  throw (err);
             console.log('已保存命令日志到数据库!');
         });   //保存抄表命令到数据库的log表中
 
-
         connection.query('SELECT time,frequency FROM setting WHERE id=1',function(err,result){
             //查询数据中的抄表命令设置信息，间隔时间和次数
-            if(err){
-                errLogStream.write( '[' + new Date() + '] ' + '\n' + err.stack + '\n');
-                throw(err);
-            }
+            if(err) throw(err);
             else{
                 console.log('收到命令,命令代码为:'+data.commandSend+'配置信息为: 时间间隔：'+result[0].time+'   次数:'+result[0].frequency);
                 //向控制台发送信息
@@ -73,24 +59,18 @@ socket.on('connection',function(socket){
         });
     });
 
-
     socket.on('setInfo',function(data){
         //监听setInfo事件
         console.log('正在修改配置信息!');
         connection.query('UPDATE setting SET ? WHERE id=1',{time:data.time,frequency:data.frequency},function(err,result){
-            if(err){
-                errLogStream.write( '[' + new Date() + '] ' + '\n'+ err.stack + '\n');
-                throw(err);
-            }
+            if(err)  throw(err);
             else{console.log('配置信息保存成功！')}
-        })  //将配置信息保存至数据库的setting表中
-    })
-
+        });  //将配置信息保存至数据库的setting表中
+    });
 
     socket.on('disconnect',function(){
         //监听disconnect事件
         connectionNum=connectionNum-1;
-        errLogStream.write( '[' + new Date() + '] ' + '\n' + '有客户端断开连接' + '\n');
         console.log('已经断开命令通道连接！当前连接数量:'+connectionNum);
     });
 });
