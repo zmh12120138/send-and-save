@@ -1,4 +1,4 @@
-var parse=require('./js/parse.js');  //引入自定义的parse.js模块
+var parse=require('./parse.js');  //引入自定义的parse.js模块
 var redis=require('redis'); //引入redis模块
 var settings=require('./settings.js');  //引入自定义的setting.js模块
 var mysql=require('mysql');  //引入Mysql模块
