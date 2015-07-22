@@ -7,34 +7,27 @@
 </head>
 <script>
     var sendlist1='FE FE FE FE FE FE FE FE FE FE FE FE FE 68 25 91 09 20 59 00 11 11 81 2E 1F 90 12 00 00 00 00 05 00 03 00 00 05 00 00 00 00 17 00 00 00 00 35 27 00 00 00 2C 60 14 00 74 14 00 46 54 00 51 49 09 22 04 10 20 00 00 6D 16';
-    var transfer=io.connect("localhost:1337");   //连接传输服务器
-    var command=io.connect("localhost:1338");  //连接命令服务器
+    var socket=io.connect("localhost:1337");   //连接传输服务器
     var clientCode;
-    command.on('connect',function(){
+    socket.on('connect',function(){
         document.write('    本客户端与命令服务器建立连接！');
-        command.on('clientCode',function(data){
+        socket.on('clientCode',function(data){
             clientCode=data;
             document.write('客户端编码：'+data+'<br>');
         });
-        command.on('disconnect',function(){
+        socket.on('disconnect',function(){
             document.write('    本客户端与命令服务器断开连接！'+clientCode+'<br>');
         });
-        command.on('start',function(data){
+        socket.on('message',function(data){
             //使用命令通道监听start事件
             var code=data.code;
             var sendList={};
             sendList.send=sendlist1;
             sendList.code=code;
             sendList.clientCode=clientCode;
-            transfer.emit('sendData',sendList);   //使用传输通道发送sendData事件
+            socket.send(sendList);   //使用传输通道发送sendData事件
         });
 
-    });
-    transfer.on('connect',function(){
-        document.write('    本客户端与传输服务器建立连接  '+'<br>');
-    });
-    transfer.on('disconnect',function(){
-        document.write('    本客户端与传输服务器断开连接！'+clientCode+'<br>');
     });
 
 </script>
