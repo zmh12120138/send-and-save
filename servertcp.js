@@ -12,7 +12,7 @@ var saveData2= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var saveData3= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var saveData4= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var child=cp.fork(__dirname+'/child.js');
-server.listen(1337,'localhost');
+server.listen(1337);
 server.on('connection',function(socket){
     server.getConnections(function(err,count){
         console.log('当前连接数量:'+count);
