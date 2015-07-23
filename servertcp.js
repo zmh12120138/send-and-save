@@ -14,7 +14,7 @@ var saveData4= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var child=cp.fork(__dirname+'/child.js');
 server.listen(1337,'localhost');
 server.on('connection',function(socket){
-    server.getConnection(function(err,count){
+    server.getConnections(function(err,count){
         console.log('当前连接数量:'+count);
     });
     socket.on('data',function(data){
@@ -45,7 +45,7 @@ server.on('connection',function(socket){
     });
 
     socket.on('end',function(){
-        server.getConnection(function(err,count){
+        server.getConnections(function(err,count){
             console.log('当前连接数量:'+count);
         });
     });
