@@ -7,16 +7,16 @@ var mysql=require('mysql');  //引入Mysql模块
 var cp=require('child_process');  //引入child_process模块
 var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
 var server=net.createServer();
-var connectionNum=0;
 var saveData1= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var saveData2= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var saveData3= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var saveData4= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var child=cp.fork(__dirname+'/child.js');
+server.listen(1337,'localhost');
 server.on('connection',function(socket){
-    connectionNum=connectionNum+1;
-    console.log('当前连接数量：'+connectionNum);
-
+    server.getConnection(function(err,count){
+        console.log('当前连接数量:'+count);
+    });
     socket.on('data',function(data){
         console.log('收到命令，开始存入缓存');
         var messageSend={};
@@ -39,12 +39,24 @@ server.on('connection',function(socket){
             }
         });
     });
-
-    socket.on('end',function(){
-        connectionNum=connectionNum-1;
-        console.log('有客户端断开连接,当前连接数:'+connectionNum);
+    socket.on('error',function(err){
+        console.log('与客户端通信的过程中发生了一个错误,错误编码为%s',err.code);
+        socket.destroy;
     });
 
+    socket.on('end',function(){
+        server.getConnection(function(err,count){
+            console.log('当前连接数量:'+count);
+        });
+    });
+
+    socket.on('close',function(had_error){
+        if(had_error){
+            console.log('由于一个错误导致socket端口被关闭。')
+        }else{
+            console.log('socket端口被正常关闭。')
+        }
+    })
     child.on('message',function(m){
         var timer=0;
         var progress;
@@ -62,6 +74,8 @@ server.on('connection',function(socket){
         }
         intervalKey=setInterval(intervalsend,m.time*1000);
     });
-
 });
-server.listen(1337,'localhost');
+
+server.on('close',function(){
+    console.log('TCP服务器被关闭')
+});
