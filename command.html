@@ -11,16 +11,51 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        window.onload=function(){
+//定时器每秒调用一次fnDate()
+            setInterval(function(){
+                fnDate();
+            },1000);
+        }
+        //js 获取当前时间
+        function fnDate(){
+            var oDiv=document.getElementById("sendtime");
+            var date=new Date();
+            var year=date.getFullYear();//当前年份
+            var month=date.getMonth();//当前月份
+            var data=date.getDate();//天
+            var hours=date.getHours();//小时
+            var minute=date.getMinutes();//分
+            var second=date.getSeconds();//秒
+            var time=year+"-"+fnW((month+1))+"-"+fnW(data)+" "+fnW(hours)+":"+fnW(minute)+":"+fnW(second);
+            oDiv.value=time;
+        }
+        //补位 当某个字段不是两位数时补0
+        function fnW(str){
+            var num;
+            str>10?num=str:num="0"+str;
+            return num;
+        }
+    </script>
+    <script>
         var command=io.connect("localhost:1338");
         function meterReading() {
             var meterid = document.getElementById('meterid').value;
             var code = document.getElementById('code').value;
+            var sendby = document.getElementById('sendby').value;
+            var type = document.getElementById('type').value;
+            var remark = document.getElementById('remark').value;
+            var sendtime =new Date() ;
             if (meterid.length != 8) {
                 document.getElementById('errMsg').innerHTML = "<p>表号长度输入错误！</p>"
                 return false;
             }
             if (code == '') {
                 document.getElementById('errMsg').innerHTML = "<p>任务编号不能为空！</p>"
+                return false;
+            }
+            if(sendby == ''){
+                document.getElementById('errMsg').innerHTML = "<p>发送人不能为空！</p>"
                 return false;
             }
             var parse1 = meterid.slice(0, 2);
@@ -32,6 +67,10 @@
             data.commandSend = commandSend;
             data.code = code;
             data.meterid = meterid;
+            data.sendby=sendby;
+            data.type=type;
+            data.remark=remark;
+            data.sendtime=sendtime;
             document.write('抄表，命令为' + commandSend);
             command.emit('meterReading', data,function(){
                 if(err) alert('命令发送出错');
@@ -59,22 +98,54 @@
     </script>
 </head>
 <body>
-<div id="body" class="container center-block" style="padding: 50px 300px 300px 50px" >
-    <div class="jumbotron center-block">
+<div id="body" class="container center-block"  >
+    <div class="center-block">
         <h2>抄表管理</h2>
         <form>
-            <div class="input-group">
-                <span class="input-group-addon">表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</span>
-                <input type="number" id="meterid" class="form-control"/>
-            </div>
-            <br>
-            <br>
-            <div class="input-group">
-                <span class="input-group-addon">任务编号：</span>
-                <input type="number" id="code" class="form-control"/>
-            </div>
-            <br>
-            <br>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</span>
+                            <input type="number" id="meterid" class="form-control"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">任务编号：</span>
+                            <input type="number" id="code" class="form-control"/>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="input-group">
+                            <span class="input-group-addon">发&nbsp;&nbsp;送&nbsp;&nbsp;人：</span>
+                            <input type="text" id="sendby" class="form-control"/>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="input-group">
+                            <span class="input-group-addon">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
+                            <input type="text" id="type" class="form-control" value="瑞纳热量表" disabled/>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</span>
+                            <input type="text" id="remark" class="form-control"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：</span>
+                            <input type="text" id="sendtime" class="form-control"  disabled/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <button class="btn btn-info center-block" onclick="meterReading()">抄表</button>
             <br>
             <div id="errMsg" class="center-block" style="font-weight: bold"></div>

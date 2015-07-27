@@ -26,6 +26,15 @@ socket.on('connection',function(socket){
             if (err) throw (err);
             console.log('命令已经存入缓存');
         });
+        connection.query('INSERT INTO command SET ?',{content:data.commandSend,type:data.type,remark:data.remark},function(err,result){
+            if(err)  throw (err);
+            console.log('已保存至command表');
+            connection.query('INSERT INTO metertask SET ?',{sendby:data.sendby,sendtime:new Date()},function(err,result){
+                if(err)  throw (err);
+                console.log('已保存至meter-task表');
+
+            });
+        });
     });
 
     socket.on('setInfo',function(data) {
@@ -35,6 +44,10 @@ socket.on('connection',function(socket){
             if (err) throw (err);
             console.log('配置信息已经存入缓存');
         });
+        connection.query('UPDATE setting SET ? WHERE id=1',{time:data.time,frequency:data.frequency},function(err,result){
+            if(err)  throw(err);
+            else{console.log('配置信息保存成功！')}
+        });  //将配置信息保存至数据库的setting表中
     });
 
     socket.on('disconnect',function(){
