@@ -45,7 +45,7 @@
             var sendby = document.getElementById('sendby').value;
             var type = document.getElementById('type').value;
             var remark = document.getElementById('remark').value;
-            var sendtime =new Date() ;
+            var sendtime =new Date().toUTCString() ;
             if (meterid.length != 8) {
                 document.getElementById('errMsg').innerHTML = "<p>表号长度输入错误！</p>"
                 return false;

@@ -22,17 +22,17 @@ socket.on('connection',function(socket){
     console.log('与客户端的命令连接通道已经建立');
     socket.on('meterReading',function(data) {
         //监听meterReading事件
-        client.hmset('command', 'code', data.code, 'commandSend', data.commandSend, 'status', 'true', function (err, response) {
+        client.hmset('command', 'code', data.code, 'commandSend', data.commandSend,'sendtime',data.sendtime ,'status', 'true', function (err, response) {
             if (err) throw (err);
             console.log('命令已经存入缓存');
-        });
+        });   //将抄表命令写入redis缓存中
+
         connection.query('INSERT INTO command SET ?',{content:data.commandSend,type:data.type,remark:data.remark},function(err,result){
             if(err)  throw (err);
-            console.log('已保存至command表');
-            connection.query('INSERT INTO metertask SET ?',{sendby:data.sendby,sendtime:new Date()},function(err,result){
+            console.log('已保存至command表');      //保存命令、类型、备注信息到command表中
+            connection.query('INSERT INTO metertask SET ?',{sendby:data.sendby,sendtime:data.sendtime},function(err,result){
                 if(err)  throw (err);
-                console.log('已保存至meter-task表');
-
+                console.log('已保存至metertask表');  //保存发送人、发送时间到metertask表中
             });
         });
     });
@@ -43,7 +43,8 @@ socket.on('connection',function(socket){
         client.hmset('setting', 'time', data.time, 'frequency', data.frequency, 'status', 'true', function (err, response) {
             if (err) throw (err);
             console.log('配置信息已经存入缓存');
-        });
+        });       //将配置信息写入redis缓存中
+
         connection.query('UPDATE setting SET ? WHERE id=1',{time:data.time,frequency:data.frequency},function(err,result){
             if(err)  throw(err);
             else{console.log('配置信息保存成功！')}

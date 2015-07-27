@@ -6,6 +6,7 @@ var settings=require('./settings.js');  //引入自定义的setting.js模块
 var mysql=require('mysql');  //引入Mysql模块
 var cp=require('child_process');  //引入child_process模块
 var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
+var connection=mysql.createConnection({host:settings.mysql.host,port:settings.mysql.port,database:settings.mysql.database,user:settings.mysql.user,password:settings.mysql.password});
 var server=net.createServer();
 var saveData1= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
 var saveData2= cp.fork(__dirname+'/savedata.js'); //再次开启子进程
@@ -70,6 +71,12 @@ server.on('connection',function(socket){
                 clearInterval(intervalKey);
                 intervalKey=null;
                 console.log('本次任务执行完毕！');
+              // var query='UPDATE metertask SET executetime='+new Date().toUTCString()+' WHERE sendtime='+ m.sendtime;
+                var query='SELECT * FROM metertask WHERE  sendtime=Mon, 27 Jul 2015 06:37:37 GMT';
+                console.log(query);
+                connection.query('UPDATE metertask SET ? WHERE ?',[{executetime:new Date().toUTCString()},{sendtime: m.sendtime}],function(err,result){
+                    if(err)  throw (err);
+                });
             }
         }
         intervalKey=setInterval(intervalsend,m.time*1000);
