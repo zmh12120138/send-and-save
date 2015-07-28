@@ -9,7 +9,6 @@ function readcommand(){
                 var sett={};
                 sett.commandSend=response.commandSend;
                 sett.sendtime=response.sendtime;
-                console.log(response.sendtime);
                  client.hmset('command','status','false',function(err,response){
                  if(err) throw (err);
                  });
