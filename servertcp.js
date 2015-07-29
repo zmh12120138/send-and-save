@@ -1,10 +1,9 @@
 var net=require('net');
-var fs = require('fs');  //引入fs模块
 var redis=require('redis'); //引入redis模块
-var path=require('path');  //引入path模块
 var settings=require('./settings.js');  //引入自定义的setting.js模块
 var mysql=require('mysql');  //引入Mysql模块
 var cp=require('child_process');  //引入child_process模块
+var sendMail=require('./sendMail.js');  //引入自定义的sendMail模块，用来发送邮件
 var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
 var connection=mysql.createConnection({host:settings.mysql.host,port:settings.mysql.port,database:settings.mysql.database,user:settings.mysql.user,password:settings.mysql.password});
 var server=net.createServer();
@@ -22,7 +21,7 @@ server.on('connection',function(socket){
     socket.on('data',function(data){
         console.log('收到命令，开始存入缓存');
         var messageSend={};
-        client.lpush('originaldata',data.toString(),function(err,result){
+        client.lpush('originaldata',data.toString(),function(err,response){
             if(err) throw (err);
             else{
                 var randomNum=Math.floor(Math.random()*4)+1;  //生成0-4之间的随机数,分别对应相应的子进程
@@ -42,7 +41,8 @@ server.on('connection',function(socket){
         });
     });
     socket.on('error',function(err){
-        console.log('与客户端通信的过程中发生了一个错误,错误编码为%s',err.code);
+        console.log('与客户端通信的过程中发生了一个错误,错误编码为s%',err.code);
+        sendMail.sendMail('与客户端通信的过程中发生了一个错误,错误编码为'+err.code);
         socket.destroy;
     });       //当客户端或者服务器在未断开连接的情况下,关闭了,会触发此error事件
 
@@ -54,9 +54,11 @@ server.on('connection',function(socket){
 
     socket.on('close',function(had_error){
         if(had_error){
-            console.log('由于一个错误导致socket端口被关闭。')
+            console.log('由于一个错误导致socket端口被关闭。');
+            sendMail.sendMail('由于一个错误导致socket端口被关闭。');
         }else{
-            console.log('socket端口被正常关闭。')
+            console.log('socket端口被正常关闭。');
+            sendMail.sendMail('socket端口被正常关闭。');
         }
     })  //检测socket端口关闭是否有错误
     child.on('message',function(m){    //监听来自child的message事件,监听到后根据信息来发送命令
@@ -81,9 +83,15 @@ server.on('connection',function(socket){
     });
 });
 server.on('error', function(err) {
-      console.log('Error occurred:', err.message);
+      console.log('Error occurred:'+ err.message);
+    sendMail.sendMail('Error occurred:' + err.message)
      });
 server.listen(1337);
 server.on('close',function(){  //监听服务器关闭的事件close
-    console.log('TCP服务器被关闭')
+    console.log('TCP服务器被关闭');
+    sendMail.sendMail('TCP服务器被关闭');
+});
+process.on('uncaughtException', function(err) {
+    server.close();
+    sendMail.sendMail('未捕获异常发生,服务器已关闭,异常信息'+err);
 });

@@ -2,7 +2,7 @@
 var net=require('net');
 var client=new net.Socket();
 client.setEncoding('utf8');
-client.connect(1337,'localhost',function(){
+client.connect(1337,'122.0.72.66',function(){
     console.log('已连接');
 });
 client.on('data',function(data){
@@ -12,4 +12,7 @@ client.on('data',function(data){
 client.on('error',function(err){
     console.log('与服务器通信的过程中发生了一个错误,错误编码为%s',err.code);
     client.destroy;
+});
+client.on('close',function(){
+    console.log('connection closed')
 });

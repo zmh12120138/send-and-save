@@ -10,4 +10,14 @@ exports.redis={
     port:'6379',
     host:'localhost',
     options:{connect_timeout:1}
-}
+};
+
+exports.mailOptions={
+    service:'QQ',
+    auth_user:'503035535@qq.com',
+    auth_pass:'xhmwan1314',
+
+    from:'node io_server <503035535@qq.com>',  //'<>'中的地址应该与auth_user中的地址一致!
+    to:'minghui.zhao@ensaving.com.cn',
+    subject:'servertcp服务器出错'
+};
