@@ -17,6 +17,8 @@ function readcommand(){
                     sett.frequency=response.frequency;
                     process.send(sett);
                 });
+            }else{
+                console.log('暂未读取到命令信息');
             }
         }
 

@@ -33,30 +33,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sendMail.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="sendMail.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sendMail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6684709" vertical-offset="0" max-vertical-offset="739">
+              <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="command.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/command.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="49" max-vertical-offset="3382">
-              <caret line="61" column="45" selection-start-line="61" selection-start-column="45" selection-end-line="61" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server-command.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="server-command.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server-command.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79431665" vertical-offset="458" max-vertical-offset="1197">
+            <state vertical-scroll-proportion="0.0" vertical-offset="458" max-vertical-offset="1197">
               <caret line="55" column="35" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
               <folding />
             </state>
@@ -124,15 +114,15 @@
         <option value="$PROJECT_DIR$/command.html" />
         <option value="$PROJECT_DIR$/server-command.js" />
         <option value="$PROJECT_DIR$/开启测试客户端.bat" />
-        <option value="$PROJECT_DIR$/child.js" />
         <option value="$PROJECT_DIR$/client.js" />
         <option value="F:/Get_Set_Data/server.js" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/settings.js" />
-        <option value="$PROJECT_DIR$/sendMail.js" />
         <option value="$PROJECT_DIR$/servertcp.js" />
         <option value="$PROJECT_DIR$/test.js" />
+        <option value="$PROJECT_DIR$/child.js" />
+        <option value="$PROJECT_DIR$/sendMail.js" />
       </list>
     </option>
   </component>
@@ -560,13 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start all.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05322129" vertical-offset="0" max-vertical-offset="714">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/开启测试客户端.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15426251" vertical-offset="0" max-vertical-offset="739">
@@ -578,14 +561,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.768595" vertical-offset="2736" max-vertical-offset="29811">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/command.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="49" max-vertical-offset="3382">
-          <caret line="61" column="45" selection-start-line="61" selection-start-column="45" selection-end-line="61" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -644,14 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sendMail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.051420838" vertical-offset="0" max-vertical-offset="739">
@@ -660,18 +627,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/child.js">
+    <entry file="file://$PROJECT_DIR$/server-command.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5142084" vertical-offset="0" max-vertical-offset="739">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="458" max-vertical-offset="1197">
+          <caret line="55" column="35" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server-command.js">
+    <entry file="file://$PROJECT_DIR$/child.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79431665" vertical-offset="458" max-vertical-offset="1197">
-          <caret line="55" column="35" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.6941813" vertical-offset="0" max-vertical-offset="739">
+          <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/command.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1378341" vertical-offset="1018" max-vertical-offset="3382">
+          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start all.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05322129" vertical-offset="0" max-vertical-offset="714">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/npm/node_modules/pm2/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="739">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sendMail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6684709" vertical-offset="0" max-vertical-offset="739">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
           <folding />
         </state>
       </provider>

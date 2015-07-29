@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-var mailOptions = {
+var mailOptions = {            //设置发送邮件选项
     from: settings.mailOptions.from, // sender address
     to: settings.mailOptions.to, // list of receivers
     subject: settings.mailOptions.subject, // Subject line
