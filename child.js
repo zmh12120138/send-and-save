@@ -1,4 +1,4 @@
-var redis=require('redis');
+﻿var redis=require('redis');
 var settings=require('./settings.js');  //引入自定义的setting.js模块
 var client=redis.createClient(settings.redis.port);   //建立redis客户端并连接至redis服务器
 function readcommand(){
@@ -18,7 +18,7 @@ function readcommand(){
                     process.send(sett);
                 });
             }else{
-                console.log('暂未读取到命令信息');
+                
             }
         }
 

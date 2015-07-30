@@ -19,30 +19,35 @@ server.on('connection',function(socket){
         console.log('当前连接数量:'+count);
     });
     socket.on('data',function(data){
-        console.log('收到命令，开始存入缓存');
+        var decode=data.toString('hex');
         var messageSend={};
-        client.lpush('originaldata',data.toString(),function(err,response){
-            if(err) throw (err);
-            else{
-                var randomNum=Math.floor(Math.random()*4)+1;  //生成0-4之间的随机数,分别对应相应的子进程
-                if(randomNum==1){
-                    saveData1.send(messageSend);     //随机数为1的时候，向第一个子进程发送消息
+        if(decode.length>25){
+            client.lpush('originaldata',decode,function(err,response){
+                if(err) throw (err);
+                else{
+                    var randomNum=Math.floor(Math.random()*4)+1;  //生成0-4之间的随机数,分别对应相应的子进程
+                    if(randomNum==1){
+                        saveData1.send(messageSend);     //随机数为1的时候，向第一个子进程发送消息
+                    }
+                    if(randomNum==2){
+                        saveData2.send(messageSend);   //随机数为2的时候，向第二个子进程发送消息
+                    }
+                    if(randomNum==3){
+                        saveData3.send(messageSend);   //随机数为3的时候，向第三个子进程发送消息
+                    }
+                    if(randomNum==4){
+                        saveData4.send(messageSend);  //随机数为4的时候，向第四个子进程发送消息
+                    }
                 }
-                if(randomNum==2){
-                    saveData2.send(messageSend);   //随机数为2的时候，向第二个子进程发送消息
-                }
-                if(randomNum==3){
-                    saveData3.send(messageSend);   //随机数为3的时候，向第三个子进程发送消息
-                }
-                if(randomNum==4){
-                    saveData4.send(messageSend);  //随机数为4的时候，向第四个子进程发送消息
-                }
-            }
-        });
+            });
+        }else{
+            console.log('数据长度不够,或为心跳包'+decode);
+        }
+
     });
     socket.on('error',function(err){
         console.log('与客户端通信的过程中发生了一个错误,错误编码为s%',err.code);
-        sendMail.sendMail('与客户端通信的过程中发生了一个错误,错误编码为'+err.code);
+        sendMail.sendMail('与客户端通信的过程中发生了一个错误,错误编码为'+err.code+new Date().toLocaleString());
         socket.destroy;
     });       //当客户端或者服务器在未断开连接的情况下,关闭了,会触发此error事件
 
@@ -55,10 +60,9 @@ server.on('connection',function(socket){
     socket.on('close',function(had_error){
         if(had_error){
             console.log('由于一个错误导致socket端口被关闭。');
-            sendMail.sendMail('由于一个错误导致socket端口被关闭。');
+            sendMail.sendMail('由于一个错误导致socket端口被关闭。'+new Date().toLocaleString());
         }else{
             console.log('socket端口被正常关闭。');
-            sendMail.sendMail('socket端口被正常关闭。');
         }
     })  //检测socket端口关闭是否有错误
     child.on('message',function(m){    //监听来自child的message事件,监听到后根据信息来发送命令
@@ -89,9 +93,9 @@ server.on('error', function(err) {
 server.listen(1337);
 server.on('close',function(){  //监听服务器关闭的事件close
     console.log('TCP服务器被关闭');
-    sendMail.sendMail('TCP服务器被关闭');
+    sendMail.sendMail('TCP服务器被关闭'+new Date().toLocaleString());
 });
 process.on('uncaughtException', function(err) {
     server.close();
-    sendMail.sendMail('未捕获异常发生,服务器已关闭,异常信息'+err);
+    sendMail.sendMail('未捕获异常发生,服务器已关闭,异常信息'+err+new Date().toLocaleString());
 });
